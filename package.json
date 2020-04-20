@@ -1,0 +1,21 @@
+{
+  "name": "store-app-be",
+  "version": "1.0.0",
+  "description": "store backend with hapi js and postgresql",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lia Siti",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "hapi": "^18.1.0",
+    "hapi-bodyparser": "^2.1.2",
+    "hapi-pg-promise": "^2.0.0",
+    "hapi-plugin-pg": "^1.1.2",
+    "joi": "^14.3.1",
+    "pg": "^8.0.2"
+  }
+}
