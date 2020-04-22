@@ -53,14 +53,13 @@ server.route({
         no_product : req.payload.no_product,
         nama_product : req.payload.nama_product,
         harga_jual : req.payload.harga_jual,
-        stok : req.payload.stok,
-        kategori1 : req.payload.kategori1,
-        kategori2 : req.payload.kategori2,
-        kategori3 : req.payload.kategori3
+        kata_promosi : req.payload.kata_promosi,
+        base64 : req.payload.base64
     }
 
           try {
-            const res  = await pool.query('INSERT INTO products(no_product, nama_product) VALUES($1, $2) RETURNING *', [reqBody.no_product, reqBody.nama_product])
+            const res  = await pool.query('INSERT INTO products(no_product, nama_product, harga_jual, kata_promosi, base64) VALUES($1, $2, $3, $4, $5) RETURNING *', 
+            [reqBody.no_product, reqBody.nama_product, reqBody.harga_jual, reqBody.kata_promosi, reqBody.base64])
             return res
           } catch (err) {
             return err.stack
@@ -81,18 +80,16 @@ server.route({
             const id = req.params.id; 
 
             const reqBody = {
-                no_product : req.payload.no_product,
-                nama_product : req.payload.nama_product,
-                harga_jual : req.payload.harga_jual,
-                stok : req.payload.stok,
-                kategori1 : req.payload.kategori1,
-                kategori2 : req.payload.kategori2,
-                kategori3 : req.payload.kategori3
+              no_product : req.payload.no_product,
+              nama_product : req.payload.nama_product,
+              harga_jual : req.payload.harga_jual,
+              kata_promosi : req.payload.kata_promosi,
+              base64 : req.payload.base64
             }
     
               try {
-                const res  = await pool.query('UPDATE products SET no_product=($1),nama_product=($2) WHERE id=($3)',
-                        [reqBody.no_product, reqBody.nama_product, id]
+                const res  = await pool.query('UPDATE products SET no_product=($1),nama_product=($2),harga_jual=($3),kata_promosi=($4), base64=($5) WHERE id=($6)',
+                        [reqBody.no_product, reqBody.nama_product, reqBody.harga_jual, reqBody.kata_promosi, reqBody.base64, id]
                     )
                 return res
               } catch (err) {
@@ -101,6 +98,22 @@ server.route({
         }
       }
     
+})
+
+// delete product by id 
+
+server.route({
+  method: 'DELETE',
+  path: '/deleteproduct/{id}',
+  handler: async (req, h) => {
+       const id = req.params.id; 
+        try {
+          const res  = await pool.query('DELETE FROM products WHERE id = $1', [id])
+          return res
+        } catch (err) {
+          return err.stack
+        }
+  }
 })
 
 const launch = async () => {
