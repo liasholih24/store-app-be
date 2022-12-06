@@ -10,7 +10,7 @@
   "author": "Lia Siti",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "body-parser": "^1.20.1",
     "hapi": "^18.1.0",
     "hapi-bodyparser": "^2.1.2",
     "hapi-pg-promise": "^2.0.0",
